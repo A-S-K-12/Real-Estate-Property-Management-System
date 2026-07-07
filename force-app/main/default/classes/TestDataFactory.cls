@@ -55,9 +55,6 @@ public class TestDataFactory {
         return tenant;
     }
 
-    /**
-     * Creates a Lease Agreement.
-     */
     public static Lease_Agreement__c createLease(
         Id propertyId,
         Id tenantId,
@@ -81,9 +78,6 @@ public class TestDataFactory {
         return lease;
     }
 
-    /**
-     * Creates a Maintenance Request.
-     */
     public static Maintenance_Request__c createMaintenanceRequest(
         Id propertyId,
         Id vendorId,

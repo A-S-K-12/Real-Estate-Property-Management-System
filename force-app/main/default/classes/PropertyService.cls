@@ -1,11 +1,5 @@
 public with sharing class PropertyService {
 
-    /*
-    *********************************************************
-    * PUBLIC METHODS
-    *********************************************************
-    */
-
     public static Id createProperty(
         PropertyController.PropertyDTO dto,
         List<PropertyController.ImageWrapper> images
@@ -175,13 +169,6 @@ public with sharing class PropertyService {
 
     }
 
-
-    /*
-    *********************************************************
-    * PRIVATE HELPERS
-    *********************************************************
-    */
-
     private static Property__c buildProperty(
         PropertyController.PropertyDTO dto
     ) {
@@ -215,13 +202,6 @@ public with sharing class PropertyService {
         property.Longitude__c = dto.longitude;
 
     }
-
-    // ===== Part 2 starts here =====
-    /*
-    *********************************************************
-    * VALIDATIONS
-    *********************************************************
-    */
 
     private static void validateProperty(
         PropertyController.PropertyDTO dto
@@ -349,13 +329,6 @@ public with sharing class PropertyService {
 
     }
 
-
-    /*
-    *********************************************************
-    * FILE UPLOAD
-    *********************************************************
-    */
-
     private static void uploadImages(
 
         Id propertyId,
@@ -428,13 +401,6 @@ public with sharing class PropertyService {
 
     }
 
-    // ===== Part 3 starts here =====
-        /*
-    *********************************************************
-    * PROPERTY SEARCH
-    *********************************************************
-    */
-
     public static PropertyController.PropertySearchResponse getProperties(
         PropertyController.PropertySearchRequest request
     ) {
@@ -448,7 +414,6 @@ public with sharing class PropertyService {
             ? 25
             : request.pageSize;
 
-        // Prevent excessive page sizes
         pageSize = Math.min(pageSize, 100);
 
         Integer pageNumber =
@@ -459,7 +424,6 @@ public with sharing class PropertyService {
         Integer offsetRows =
             (pageNumber - 1) * pageSize;
 
-        // Salesforce OFFSET supports up to 2000 rows
         if (offsetRows > 2000) {
             throw new AuraHandledException(
                 'Maximum page limit exceeded.'
@@ -531,13 +495,6 @@ public with sharing class PropertyService {
 
     }
 
-
-    /*
-    *********************************************************
-    * WHERE CLAUSE
-    *********************************************************
-    */
-
     private static String buildWhereClause(
         PropertyController.PropertySearchRequest request
     ) {
@@ -591,13 +548,6 @@ public with sharing class PropertyService {
             String.join(conditions, ' AND ');
 
     }
-
-
-    /*
-    *********************************************************
-    * ORDER BY
-    *********************************************************
-    */
 
     private static String buildOrderBy(
         PropertyController.PropertySearchRequest request

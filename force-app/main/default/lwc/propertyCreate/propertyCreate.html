@@ -1,29 +1,24 @@
 <template>
     <lightning-card variant="Narrow">
-        <!-- Spinner -->
         <template if:true={isLoading}>
             <lightning-spinner
                 alternative-text="Saving Property"
                 size="medium">
             </lightning-spinner>
         </template>
-        <!-- Header -->
         <div class="header">
             <div>
                 <h1>Create Property</h1>
                 <p>Add a new residential or commercial property.</p>
             </div>
         </div>
-        <!-- Main Form -->
         <div class="container">
             <lightning-layout multiple-rows>
-                <!-- LEFT COLUMN -->
                 <lightning-layout-item
                     size="12"
                     large-device-size="6"
                     medium-device-size="6"
                     padding="around-small">
-                    <!-- Property Details -->
                     <section class="section">
                         <div class="section-title">
                             Property Details
@@ -69,7 +64,6 @@
                             onchange={handleChange}>
                         </lightning-input>
                     </section>
-                    <!-- Description -->
                     <section class="section">
                         <div class="section-title">
                             Description
@@ -84,13 +78,11 @@
                         </lightning-textarea>
                     </section>
                 </lightning-layout-item>
-                <!-- RIGHT COLUMN -->
                 <lightning-layout-item
                     size="12"
                     large-device-size="6"
                     medium-device-size="6"
                     padding="around-small">
-                    <!-- Address -->
                     <section class="section">
                         <div class="section-title">
                             Address
@@ -131,7 +123,6 @@
                             onchange={handleChange}>
                         </lightning-input>
                     </section>
-                    <!-- Images -->
                     <section class="section">
                         <div class="section-title">
                             Property Images
@@ -171,7 +162,6 @@
                             </div>
                         </template>
                     </section>
-                    <!-- Map -->
                     <section class="section">
                         <div class="section-title">
                             Location Preview
@@ -191,7 +181,6 @@
                 </lightning-layout-item>
             </lightning-layout>
         </div>
-        <!-- Footer -->
         <div class="footer">
             <lightning-button
                 label="Cancel"

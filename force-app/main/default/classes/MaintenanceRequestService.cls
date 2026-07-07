@@ -2,7 +2,6 @@ public with sharing class MaintenanceRequestService {
 
     public static void assignVendor(List<Maintenance_Request__c> requests) {
 
-        // Get all active vendors
         List<Vendor__c> vendors = [
             SELECT Id, Name
             FROM Vendor__c
@@ -14,7 +13,6 @@ public with sharing class MaintenanceRequestService {
             return;
         }
 
-        // Get current workload for each vendor
         Map<Id, Integer> workloadMap = new Map<Id, Integer>();
 
         for (AggregateResult ar : [
@@ -30,17 +28,14 @@ public with sharing class MaintenanceRequestService {
             );
         }
 
-        // Assign vendors
         for (Maintenance_Request__c req : requests) {
 
-            // Initialize with first vendor
             Id selectedVendor = vendors[0].Id;
 
             Integer minimumLoad = workloadMap.containsKey(selectedVendor)
                 ? workloadMap.get(selectedVendor)
                 : 0;
 
-            // Find vendor with least workload
             for (Vendor__c vendor : vendors) {
 
                 Integer currentLoad = workloadMap.containsKey(vendor.Id)
@@ -53,10 +48,7 @@ public with sharing class MaintenanceRequestService {
                 }
             }
 
-            // Assign vendor
             req.Vendor__c = selectedVendor;
-
-            // Update workload map so bulk inserts are distributed fairly
             workloadMap.put(selectedVendor, minimumLoad + 1);
         }
     }

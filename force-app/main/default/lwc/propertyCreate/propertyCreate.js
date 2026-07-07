@@ -4,7 +4,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 export default class PropertyCreate extends NavigationMixin(LightningElement) {
 
-MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+MAX_FILE_SIZE = 5 * 1024 * 1024; 
 SUPPORTED_TYPES = [
     'image/jpeg',
     'image/jpg',

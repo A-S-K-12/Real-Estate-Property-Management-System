@@ -1,11 +1,5 @@
 public with sharing class PropertyController {
 
-    /*
-    *********************************************************
-    * PROPERTY CRUD
-    *********************************************************
-    */
-
     @AuraEnabled
     public static Id createProperty(
         PropertyDTO dto,
@@ -41,12 +35,6 @@ public with sharing class PropertyController {
     ) {
         PropertyService.deleteProperty(propertyId);
     }
-
-    /*
-    *********************************************************
-    * PROPERTY DTO
-    *********************************************************
-    */
 
     public class PropertyDTO {
 
@@ -92,15 +80,9 @@ public with sharing class PropertyController {
         @AuraEnabled
         public Decimal longitude { get; set; }
 
-        /*
-         * Used later for Nearby Search
-         */
         @AuraEnabled
         public Decimal distance { get; set; }
 
-        /*
-         * Used later in Property List
-         */
         @AuraEnabled
         public String thumbnailUrl { get; set; }
 
@@ -134,12 +116,6 @@ public with sharing class PropertyController {
 
     }
 
-        /*
-    *********************************************************
-    * IMAGE WRAPPER
-    *********************************************************
-    */
-
     public class ImageWrapper {
 
         @AuraEnabled
@@ -155,13 +131,6 @@ public with sharing class PropertyController {
         }
 
     }
-
-
-    /*
-    *********************************************************
-    * SEARCH REQUEST
-    *********************************************************
-    */
 
     public class PropertySearchRequest {
 
@@ -183,9 +152,6 @@ public with sharing class PropertyController {
         @AuraEnabled
         public String furnishingStatus { get; set; }
 
-        /*
-         * For future Nearby Search
-         */
         @AuraEnabled
         public Decimal latitude { get; set; }
 
@@ -195,9 +161,6 @@ public with sharing class PropertyController {
         @AuraEnabled
         public Decimal distance { get; set; }
 
-        /*
-         * Sorting
-         */
         @AuraEnabled
         public String sortBy { get; set; }
 
@@ -208,13 +171,6 @@ public with sharing class PropertyController {
         }
 
     }
-
-
-    /*
-    *********************************************************
-    * SEARCH RESPONSE
-    *********************************************************
-    */
 
     public class PropertySearchResponse {
 
@@ -245,12 +201,6 @@ public with sharing class PropertyController {
 
     }
 
-       /*
-    *********************************************************
-    * ADDRESS WRAPPER
-    *********************************************************
-    */
-
     public class AddressWrapper {
 
         @AuraEnabled
@@ -272,13 +222,6 @@ public with sharing class PropertyController {
         }
 
     }
-
-
-    /*
-    *********************************************************
-    * GEO LOCATION WRAPPER
-    *********************************************************
-    */
 
     public class GeoLocationWrapper {
 
