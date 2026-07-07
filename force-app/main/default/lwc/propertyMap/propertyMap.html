@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Property Location">
+
+        <template if:true={mapMarkers}>
+            <lightning-map
+                map-markers={mapMarkers}
+                zoom-level="16">
+            </lightning-map>
+        </template>
+
+    </lightning-card>
+</template>
