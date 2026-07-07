@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Send Lease Agreement">
+
+        <div class="slds-p-around_medium">
+
+            <p>
+                Click <strong>Send</strong> to email the latest Lease Agreement
+                PDF to the tenant.
+            </p>
+
+        </div>
+
+        <div class="slds-p-around_medium slds-text-align_right">
+
+            <lightning-button
+                label="Cancel"
+                onclick={handleCancel}>
+            </lightning-button>
+
+            <lightning-button
+                class="slds-m-left_small"
+                variant="brand"
+                label="Send"
+                onclick={sendPdf}
+                disabled={isLoading}>
+            </lightning-button>
+
+        </div>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Sending...">
+            </lightning-spinner>
+        </template>
+
+    </lightning-card>
+</template>

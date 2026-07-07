@@ -1,0 +1,210 @@
+<template>
+    <lightning-card variant="Narrow">
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Saving Property"
+                size="medium">
+            </lightning-spinner>
+        </template>
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>Create Property</h1>
+                <p>Add a new residential or commercial property.</p>
+            </div>
+        </div>
+        <!-- Main Form -->
+        <div class="container">
+            <lightning-layout multiple-rows>
+                <!-- LEFT COLUMN -->
+                <lightning-layout-item
+                    size="12"
+                    large-device-size="6"
+                    medium-device-size="6"
+                    padding="around-small">
+                    <!-- Property Details -->
+                    <section class="section">
+                        <div class="section-title">
+                            Property Details
+                        </div>
+                        <lightning-input
+                            label="Property Name"
+                            required
+                            value={property.name}
+                            data-field="name"
+                            onchange={handleChange}>
+                        </lightning-input>
+                        <lightning-combobox
+                            label="Property Type"
+                            data-field="propertyType"
+                            value={property.propertyType}
+                            options={propertyTypes}
+                            required
+                            onchange={handleChange}>
+                        </lightning-combobox>
+                        <lightning-combobox
+                            label="Availability Status"
+                            data-field="status"
+                            value={property.status}
+                            options={statusOptions}
+                            required
+                            onchange={handleChange}>
+                        </lightning-combobox>
+                        <lightning-combobox
+                            label="Furnishing Status"
+                            data-field="furnishingStatus"
+                            value={property.furnishingStatus}
+                            options={furnishingOptions}
+                            onchange={handleChange}>
+                        </lightning-combobox>
+                        <lightning-input
+                            type="number"
+                            formatter="currency"
+                            step="0.01"
+                            label="Monthly Rent"
+                            data-field="rent"
+                            value={property.rent}
+                            required
+                            onchange={handleChange}>
+                        </lightning-input>
+                    </section>
+                    <!-- Description -->
+                    <section class="section">
+                        <div class="section-title">
+                            Description
+                        </div>
+                        <lightning-textarea
+                            label="Description"
+                            data-field="description"
+                            value={property.description}
+                            maxlength="5000"
+                            required
+                            onchange={handleChange}>
+                        </lightning-textarea>
+                    </section>
+                </lightning-layout-item>
+                <!-- RIGHT COLUMN -->
+                <lightning-layout-item
+                    size="12"
+                    large-device-size="6"
+                    medium-device-size="6"
+                    padding="around-small">
+                    <!-- Address -->
+                    <section class="section">
+                        <div class="section-title">
+                            Address
+                        </div>
+                        <lightning-textarea
+                            label="Street Address"
+                            required
+                            data-field="address"
+                            value={property.address}
+                            onchange={handleChange}>
+                        </lightning-textarea>
+                        <lightning-input
+                            label="City"
+                            required
+                            data-field="city"
+                            value={property.city}
+                            onchange={handleChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="State"
+                            required
+                            data-field="state"
+                            value={property.state}
+                            onchange={handleChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Postal Code"
+                            required
+                            data-field="postalCode"
+                            value={property.postalCode}
+                            onchange={handleChange}>
+                        </lightning-input>
+                        <lightning-input
+                            label="Country"
+                            required
+                            data-field="country"
+                            value={property.country}
+                            onchange={handleChange}>
+                        </lightning-input>
+                    </section>
+                    <!-- Images -->
+                    <section class="section">
+                        <div class="section-title">
+                            Property Images
+                        </div>
+                        <lightning-input
+                            name="propertyImages"
+                            type="file"
+                            multiple
+                            accept="image/png,image/jpeg"
+                            onchange={handleFiles}>
+                        </lightning-input>
+                        <template if:true={hasImages}>
+                            <div class="preview-container">
+                                <template
+                                    for:each={images}
+                                    for:item="img"
+                                    for:index="index">
+                                    <div
+                                        class="preview-card"
+                                        key={img.fileName}>
+                                        <img
+                                            src={img.preview}
+                                            alt={img.fileName}
+                                            class="preview-image"/>
+                                        <div class="filename">
+                                            {img.fileName}
+                                        </div>
+                                        <lightning-button-icon
+                                            icon-name="utility:close"
+                                            alternative-text="Remove"
+                                            title="Remove Image"
+                                            data-index={index}
+                                            onclick={removeImage}>
+                                        </lightning-button-icon>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </section>
+                    <!-- Map -->
+                    <section class="section">
+                        <div class="section-title">
+                            Location Preview
+                        </div>
+                        <template if:true={showMap}>
+                            <lightning-map
+                                map-markers={markers}
+                                zoom-level="15">
+                            </lightning-map>
+                        </template>
+                        <template if:false={showMap}>
+                            <div class="map-placeholder">
+                                Map preview will appear after address is geocoded.
+                            </div>
+                        </template>
+                    </section>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            <lightning-button
+                label="Cancel"
+                onclick={cancel}
+                disabled={isLoading}>
+            </lightning-button>
+
+            <lightning-button
+                variant="brand"
+                label="Save Property"
+                onclick={save}
+                disabled={isLoading}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>
